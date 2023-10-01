@@ -7,11 +7,53 @@ import Timer from './components/Timer/Timer'
 
 function App() {
   
-  const [currentTurn, serCurrentTurn] = useState("Pomodoro")
-  const [btnText, serbtnText] = useState("Start")
-  const [currentTime, serCurrentTime] = useState("")
+  const [currentTurn, setCurrentTurn] = useState("Pomodoro")
+  const [btnText, setbtnText] = useState("Start")
+  const [currentTime, setCurrentTime] = useState("")
+  const [turns,setTurns] = useState([
+    {name:"Break", time: 5},
+    {name:"Pomodoro", time: 25},
+])
+  const [paused, setPaused] = useState(true)
 
 
+  //functions
+  const handleIncrement =(turn) => {
+    let index = turns.indexOf(turn)
+    if(turns[index].time < 60)
+       setTurns(turns.map(item => turns.indexOf(item) === index ? {...item, time: turn.time + 1 }:item ))
+  } 
+
+  const handleDecrement = (turn) =>{
+    let index = turns.indexOf(turn)
+    if(turns[index].time > 1)
+       setTurns(turns.map(item => turns.indexOf(item) === index ? {...item, time: turn.time - 1 }:item ))
+  }
+
+  const handleReset = () => {
+    setCurrentTurn('Pomodoro');
+    setbtnText("Start");
+    setCurrentTime("");
+    setTurns([
+      {name:"Break", time: 5},
+      {name:"Pomodoro", time: 25},
+  ])
+  }
+
+  const handleStartStop =()=>{
+  let currentTurnTime = turns.filter(turn => turn.name === currentTurn)[0].time
+
+  if(btnText === "Start"){
+    setPaused(false);
+    setbtnText("Pause")
+  }
+
+   
+
+
+
+
+  } // end of handleStartStop function
 
 
   return (
@@ -19,8 +61,8 @@ function App() {
       <section className='top flex-center'>
         
         <div className='timer-box card'>
-          <TimeControl/>
-          <Timer currentTurn={currentTurn} currentTime={currentTime} btnText={btnText} />
+          <TimeControl onIncrement={handleIncrement} onDecrement={handleDecrement} turns={turns} />
+          <Timer currentTurn={currentTurn} currentTime={currentTime} btnText={btnText} onReset={handleReset}/>
 
         </div>
         <div className='todoList-box'></div>
@@ -34,7 +76,7 @@ function App() {
       
       
 
- 
+      <audio id="beep" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"></audio>
     </>
   )
 }

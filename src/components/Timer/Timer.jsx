@@ -3,7 +3,7 @@ import { changeTimeFormat } from '../../service'
 import { turns } from '../../service'
 import './Timer.css'
 
-const Timer = ({currentTurn, btnText, currentTime}) => {
+const Timer = ({currentTurn, btnText, currentTime,onReset}) => {
   let currentTurnTime = turns.filter(turn => turn.name === currentTurn)[0].time
   return (
     <div className='timer-container flex-center-col'>
@@ -14,7 +14,7 @@ const Timer = ({currentTurn, btnText, currentTime}) => {
         </div>
         <div className='btns'>
         <button id="start-stop">{btnText === "Start" || btnText === "Resume"?<i className="fa-solid fa-play"></i>:<i className="fa-solid fa-pause"></i>}</button>
-        <button id="reset"><i className="fa-solid fa-arrows-rotate"></i></button>
+        <button id="reset" onClick={onReset}><i className="fa-solid fa-arrows-rotate"></i></button>
         </div>
         
     </div>
