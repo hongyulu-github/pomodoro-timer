@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import './App.css'
 import TimeControl from './components/TimeControl/TimeControl'
 import RandomQuote from './components/RandomQuote/RandomQuote'
@@ -15,7 +15,12 @@ function App() {
     {name:"Pomodoro", time: 25},
 ])
   const [paused, setPaused] = useState(true)
+  const [countdown,setCountdown] = useState(null)
 
+  const [currentTurnTime, setCurrentTurnTime] = useState(turns.find(turn => turn.name === currentTurn)?.time || 0)
+  useEffect(()=>{
+      setCurrentTurnTime(turns.find(turn => turn.name === currentTurn)?.time)
+  },[turns])
 
   //functions
   const handleIncrement =(turn) => {
@@ -40,20 +45,10 @@ function App() {
   ])
   }
 
-  const handleStartStop =()=>{
-  let currentTurnTime = turns.filter(turn => turn.name === currentTurn)[0].time
-
-  if(btnText === "Start"){
-    setPaused(false);
-    setbtnText("Pause")
-  }
-
+  const handleStartStop = () => {
    
-
-
-
-
-  } // end of handleStartStop function
+  };
+   // end of handleStartStop function
 
 
   return (
@@ -62,7 +57,7 @@ function App() {
         
         <div className='timer-box card'>
           <TimeControl onIncrement={handleIncrement} onDecrement={handleDecrement} turns={turns} />
-          <Timer currentTurn={currentTurn} currentTime={currentTime} btnText={btnText} onReset={handleReset}/>
+          <Timer currentTurn={currentTurn} currentTime={currentTime} currentTurnTime={currentTurnTime} btnText={btnText} onReset={handleReset} onStartStop={handleStartStop}/>
 
         </div>
         <div className='todoList-box'></div>
