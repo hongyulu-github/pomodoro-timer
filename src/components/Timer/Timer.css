@@ -1,0 +1,19 @@
+.timer-container{
+    height: 300px;
+}
+h3{
+    margin: 0 0 10px 0;
+    font-size: 20px;
+}
+h4{
+    margin:  0 0 5px 0 ;
+    font-weight: normal;
+}
+.countdown-timer{
+    font-size: 60px;
+    margin-bottom:10px ;
+}
+.btns > button{
+   margin:  0 5px;
+   font-size: 15px;
+}

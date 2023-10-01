@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Young+Serif&display=swap');
+:root{
+    --dark-blue: rgb(10, 20, 42);
+    --dark-purple:rgb(75, 82, 126);
+    --light-purple:rgb(124, 129, 173);
+    --light-blue:rgb(142, 172, 205);
+    --watery-blue:rgb(210, 224, 251);
+    --watery-purple:rgb(140, 146, 187);
+    --light-green:rgb(215, 229, 202);
+    --dark-yellow:rgb(229, 195, 166);
+    --light-yellow:rgb(249, 243, 204);
+    --font:'Young Serif', serif;
+}
+
+*{
+    color: var(--dark-blue);
+   
+}
+.body,html{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, var(--watery-blue), var(--watery-purple), var(--dark-yellow));
+    margin: 0;
+    font-family: var(--font);
+
+}
+
+.card {
+    border-radius: 15px;
+    background: var(--watery-blue);
+    box-shadow: -15px -15px 30px var(--light-purple); 
+  }
+
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 15px;
+}
+
+.flex-center-col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 15px;
+
+}
+.timer-box{
+    width: 400px;
+    height: 500px;
+}
+
+
+  
+ 
+  
+ 
+  
+ 
+  
+  
