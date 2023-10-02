@@ -3,8 +3,8 @@ import './App.css'
 import TimeControl from './components/TimeControl/TimeControl'
 import RandomQuote from './components/RandomQuote/RandomQuote'
 import Timer from './components/Timer/Timer'
-import TodoList from './components/TodoList'
-import Form from './components/Form'
+import TodoList from './components/TodoList/TodoList'
+import Form from './components/Form/Form'
 
 function App() {
   
@@ -35,6 +35,10 @@ function App() {
   const [input, setInput] = useState('');
   const [todos, setTodos] = useState(initialState)
   const [editTodo, setEditTodo] = useState(null)
+  useEffect(()=>{
+    localStorage.setItem('todos',JSON.stringify(todos))
+  },[todos])
+ 
 
   //functions
   const handleIncrement =(turn) => {

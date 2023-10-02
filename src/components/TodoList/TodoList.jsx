@@ -1,9 +1,11 @@
 import React from 'react'
+import styles from './TodoList.module.css'
 
 const TodoList = ({todos, setTodos, setEditTodo}) => {
     const handleDelete =({id}) =>{
         setTodos(todos.filter(todo => todo.id !== id))
     }
+    
     const handleComplete =(todo)=>{
         setTodos(
             todos.map(item => {
@@ -14,6 +16,7 @@ const TodoList = ({todos, setTodos, setEditTodo}) => {
             })
         )
         }
+
     const handleEdit =({id})=>{
         const findTodo = todos.find((todo) => todo.id === id);
         setEditTodo(findTodo)

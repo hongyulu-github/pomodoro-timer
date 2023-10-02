@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './RandomQuote.css'
+import styles from './RandomQuote.module.css'
 
 const RandomQuote = () => {
   const [quote, setQuote] = useState({ text: '', author: '' }); 
@@ -25,7 +25,7 @@ const RandomQuote = () => {
 
   return (
     <>
-    <div className='quote-container card'>
+    <div className={`${styles.quoteContainer} ${styles.card}`}>
     <p>{quote.text}</p>
       {authorName && authorName.includes(',') ? (
         <p>--{authorName.slice(0, authorName.indexOf(','))}</p>

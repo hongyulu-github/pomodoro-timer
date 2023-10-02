@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import {v4 as uuidU4} from 'uuid'
+import styles from './Form.module.css'
 
 const Form = ({input, setInput, todos, setTodos, editTodo, setEditTodo}) => {
   const onInputChange =(event) =>{

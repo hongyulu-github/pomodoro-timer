@@ -1,0 +1,18 @@
+.timeControlContainer{
+   height: 200px;
+}
+.timeControlTitle{
+   margin-top: 35px;
+}
+
+.turnLength{
+   margin: 0  0 5px 0;
+   font-size: 20px;
+}
+.turnLabel{
+   margin: 5px 0;
+}
+.btns > button{
+   margin:  0 5px;
+   font-size: 15px;
+}

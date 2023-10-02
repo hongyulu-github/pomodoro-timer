@@ -12,11 +12,13 @@
     --font:'Young Serif', serif;
 }
 
+
 *{
     color: var(--dark-blue);
    
 }
-.body,html{
+
+body,html{
     height: 100vh;
     display: flex;
     justify-content: center;
