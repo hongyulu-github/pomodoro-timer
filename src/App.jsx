@@ -11,8 +11,8 @@ function App() {
   const [btnText, setbtnText] = useState("Start")
   const [currentTime, setCurrentTime] = useState("")
   const [turns,setTurns] = useState([
-    {name:"Break", time: 5},
-    {name:"Pomodoro", time: 25},
+    {name:"Break", time: 0.05},
+    {name:"Pomodoro", time: 0.05},
 ])
   const [paused, setPaused] = useState(true)
   const [countdown,setCountdown] = useState(null)
@@ -40,15 +40,56 @@ function App() {
     setbtnText("Start");
     setCurrentTime("");
     setTurns([
-      {name:"Break", time: 5},
-      {name:"Pomodoro", time: 25},
+      {name:"Break", time: 0.05},
+      {name:"Pomodoro", time: 0.1},
   ])
+
   }
 
   const handleStartStop = () => {
+
+    
+
+    if(btnText ==="Start" || btnText === "Resume"){
+      setPaused(false);
+      setbtnText('Pause')
+      
+
+
+      setCountdown(setInterval(() => {
+        if(currentTurnTime*60 <= 0){
+          const audioEle = document.getElementById('beep')
+          audioEle.play()
+          setCurrentTurn(currentTurn === "Pomodoro"? "Break":"Pomodoro") // not working
+          setCurrentTurnTime((turns.find(turn => turn.name === currentTurn).time))    // wprked, but turn nor changed so this not changes correctly
+          console.log("less than 1" + currentTurn)  
+             //working
+        } else if (currentTurnTime*60 >= 1){
+          setCurrentTurnTime(prevTime => (prevTime*60-1)/60)
+          console.log(currentTurnTime) 
+        }
+
+
+      }, 1000));
+
+
+      //cd
+
+    } else if (btnText === "Pause"){
+      setPaused(true)
+      setbtnText('Resume')
+
+      if (countdown) {
+        clearInterval(countdown)
+        setCountdown(null)
+        
+      }
+    }
+
+    
    
-  };
-   // end of handleStartStop function
+   
+  };// end of handleStartStop function
 
 
   return (

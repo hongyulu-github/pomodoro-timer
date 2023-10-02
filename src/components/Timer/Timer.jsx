@@ -7,10 +7,11 @@ const Timer = ({currentTurn, btnText, currentTime,onReset,onStartStop,currentTur
  //let currentTurnTime = turns.filter(turn => turn.name === currentTurn)[0].time
   return (
     <div className='timer-container flex-center-col'>
-        <h3 className=''>{currentTurn === "break"?"A new break has begun":"Session"}</h3>
+        <h3 className=''>{currentTurn === "break"?"A new break has begun":"Pomodoro"}</h3>
         <h4>{btnText}</h4>
         <div className='countdown-timer'>
-        {currentTime === ""?changeTimeFormat(currentTurnTime):currentTime}
+          {changeTimeFormat(currentTurnTime)}
+       {/*currentTime === ""?changeTimeFormat(currentTurnTime):changeTimeFormat(currentTurnTime)*/} 
         </div>
         <div className='btns'>
         <button id="start-stop" onClick={onStartStop}>{btnText === "Start" || btnText === "Resume"?<i className="fa-solid fa-play"></i>:<i className="fa-solid fa-pause"></i>}</button>
