@@ -2,17 +2,16 @@ import { useState, useEffect} from 'react'
 import './App.css'
 import TimeControl from './components/TimeControl/TimeControl'
 import RandomQuote from './components/RandomQuote/RandomQuote'
-import { changeTimeFormat } from './service'
 import Timer from './components/Timer/Timer'
 
 function App() {
   
   const [currentTurn, setCurrentTurn] = useState("Pomodoro")
   const [btnText, setbtnText] = useState("Start")
-  const [currentTime, setCurrentTime] = useState("")
+ // const [currentTime, setCurrentTime] = useState("")
   const [turns,setTurns] = useState([
-    {name:"Break", time: 0.05},
-    {name:"Pomodoro", time: 0.05},
+    {name:"Break", time: 5},
+    {name:"Pomodoro", time: 25},
 ])
   const [paused, setPaused] = useState(true)
   const [countdown,setCountdown] = useState(null)
@@ -36,13 +35,16 @@ function App() {
   }
 
   const handleReset = () => {
+    clearInterval(countdown)
+    setCountdown(null)
     setCurrentTurn('Pomodoro');
     setbtnText("Start");
-    setCurrentTime("");
+   // setCurrentTime("");
     setTurns([
-      {name:"Break", time: 0.05},
-      {name:"Pomodoro", time: 0.1},
+      {name:"Break", time: 5},
+      {name:"Pomodoro", time: 25},
   ])
+    setCurrentTurnTime(turns.find(turn => turn.name === currentTurn)?.time || 0)
 
   }
 
@@ -57,19 +59,17 @@ function App() {
 
 
       setCountdown(setInterval(() => {
-        if(currentTurnTime*60 <= 0){
+        if(currentTurnTime*60 < 1){ // why interval not checking this condition and trigger the function inside when it hits zero
           const audioEle = document.getElementById('beep')
           audioEle.play()
-          setCurrentTurn(currentTurn === "Pomodoro"? "Break":"Pomodoro") // not working
-          setCurrentTurnTime((turns.find(turn => turn.name === currentTurn).time))    // wprked, but turn nor changed so this not changes correctly
+          setCurrentTurn(currentTurn === "Pomodoro"? "Break":"Pomodoro") 
+          setCurrentTurnTime((turns.find(turn => turn.name === (currentTurn=== "Pomodoro"? "Break":"Pomodoro")).time))    
           console.log("less than 1" + currentTurn)  
-             //working
+             
         } else if (currentTurnTime*60 >= 1){
-          setCurrentTurnTime(prevTime => (prevTime*60-1)/60)
+          setCurrentTurnTime(prevTime => (prevTime*60-1)/60) // why the currentTurnTime, when loged is not changes but rendered is changed
           console.log(currentTurnTime) 
         }
-
-
       }, 1000));
 
 
@@ -98,7 +98,7 @@ function App() {
         
         <div className='timer-box card'>
           <TimeControl onIncrement={handleIncrement} onDecrement={handleDecrement} turns={turns} />
-          <Timer currentTurn={currentTurn} currentTime={currentTime} currentTurnTime={currentTurnTime} btnText={btnText} onReset={handleReset} onStartStop={handleStartStop}/>
+          <Timer currentTurn={currentTurn} currentTurnTime={currentTurnTime} btnText={btnText} onReset={handleReset} onStartStop={handleStartStop}/>
 
         </div>
         <div className='todoList-box'></div>
