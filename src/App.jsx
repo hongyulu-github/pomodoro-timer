@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react'
+import { useState, useEffect, useRef} from 'react'
 import './App.css'
 import TimeControl from './components/TimeControl/TimeControl'
 import RandomQuote from './components/RandomQuote/RandomQuote'
@@ -6,20 +6,28 @@ import Timer from './components/Timer/Timer'
 
 function App() {
   
+
+  //states anf refs
   const [currentTurn, setCurrentTurn] = useState("Pomodoro")
   const [btnText, setbtnText] = useState("Start")
- // const [currentTime, setCurrentTime] = useState("")
-  const [turns,setTurns] = useState([
-    {name:"Break", time: 5},
-    {name:"Pomodoro", time: 25},
-])
   const [paused, setPaused] = useState(true)
-  const [countdown,setCountdown] = useState(null)
-
+  const [turns,setTurns] = useState([
+    {name:"Break", time: 0.05},
+    {name:"Pomodoro", time: 0.1},
+])
   const [currentTurnTime, setCurrentTurnTime] = useState(turns.find(turn => turn.name === currentTurn)?.time || 0)
   useEffect(()=>{
       setCurrentTurnTime(turns.find(turn => turn.name === currentTurn)?.time)
   },[turns])
+  const countdownRef = useRef(null)
+  useEffect(() => {
+    return () => {
+      if (countdownRef.current) {
+        clearInterval(countdownRef.current);
+        countdownRef.current = null;
+      }
+    };
+  }, []);
 
   //functions
   const handleIncrement =(turn) => {
@@ -55,40 +63,35 @@ function App() {
     if(btnText ==="Start" || btnText === "Resume"){
       setPaused(false);
       setbtnText('Pause')
-      
+      // cuidado: condition inside of func. no func inside of condition
+      countdownRef.current = setInterval(() => {
+        
+        setCurrentTurnTime(prevTime => {
+          if (prevTime * 60 >= 1) {
+            return (prevTime * 60 - 1) / 60;
+          } else {
+            clearInterval(countdownRef.current);
+            countdownRef.current = null;
+            
+            const audioEle = document.getElementById('beep');
+            audioEle.play();
 
-
-      setCountdown(setInterval(() => {
-        if(currentTurnTime*60 < 1){ // why interval not checking this condition and trigger the function inside when it hits zero
-          const audioEle = document.getElementById('beep')
-          audioEle.play()
-          setCurrentTurn(currentTurn === "Pomodoro"? "Break":"Pomodoro") 
-          setCurrentTurnTime((turns.find(turn => turn.name === (currentTurn=== "Pomodoro"? "Break":"Pomodoro")).time))    
-          console.log("less than 1" + currentTurn)  
-             
-        } else if (currentTurnTime*60 >= 1){
-          setCurrentTurnTime(prevTime => (prevTime*60-1)/60) // why the currentTurnTime, when loged is not changes but rendered is changed
-          console.log(currentTurnTime) 
-        }
-      }, 1000));
-
-
-      //cd
-
+            setPaused(true)
+            setbtnText("Start")
+            setCurrentTurn(currentTurn === 'Pomodoro' ? 'Break' : 'Pomodoro');
+            return turns.find(turn => turn.name === (currentTurn === 'Pomodoro' ? 'Break' : 'Pomodoro')).time;
+          }
+        });
+      }, 1000);
     } else if (btnText === "Pause"){
       setPaused(true)
       setbtnText('Resume')
 
-      if (countdown) {
-        clearInterval(countdown)
-        setCountdown(null)
-        
-      }
-    }
-
-    
-   
-   
+          if (countdownRef.current) {
+            clearInterval(countdownRef.current);
+            countdownRef.current = null;
+          }           
+    }  
   };// end of handleStartStop function
 
 
