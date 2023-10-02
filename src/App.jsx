@@ -3,6 +3,8 @@ import './App.css'
 import TimeControl from './components/TimeControl/TimeControl'
 import RandomQuote from './components/RandomQuote/RandomQuote'
 import Timer from './components/Timer/Timer'
+import TodoList from './components/TodoList'
+import Form from './components/Form'
 
 function App() {
   
@@ -28,6 +30,11 @@ function App() {
       }
     };
   }, []);
+
+  const initialState = JSON.parse(localStorage.getItem('todos')) || [] 
+  const [input, setInput] = useState('');
+  const [todos, setTodos] = useState(initialState)
+  const [editTodo, setEditTodo] = useState(null)
 
   //functions
   const handleIncrement =(turn) => {
@@ -104,7 +111,10 @@ function App() {
           <Timer currentTurn={currentTurn} currentTurnTime={currentTurnTime} btnText={btnText} onReset={handleReset} onStartStop={handleStartStop}/>
 
         </div>
-        <div className='todoList-box'></div>
+        <div className='todoList-box'>
+          <Form input={input} setInput={setInput} todos={todos} setTodos={setTodos} editTodo={editTodo} setEditTodo={setEditTodo} />
+          <TodoList todos={todos} setTodos={setTodos} setEditTodo={setEditTodo}/>
+        </div>
 
       
       </section>
