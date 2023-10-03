@@ -1,7 +1,7 @@
 .quoteContainer{
-    height: 100px;
+    height: calc(max-content + 10px);
     width: 85vw;
-    padding: 10px 0 0 20px;
+    padding: 10px 0 10px 20px;
     
 }
 

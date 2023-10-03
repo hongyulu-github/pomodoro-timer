@@ -91,7 +91,44 @@ button:hover{
     transition: ease-in-out 0.4s;
 }
   
-  
+
+@media (max-width: 900px) {
+ 
+    .timer-box{
+      
+       width: 25vw;
+       height: max-content;
+       margin-right: 3vw;
+   }
+   
+   .todoList-box{
+       width: 65vw;
+       height: max-content;
+       margin-bottom: 7vw;
+   }
+     
+     }
  
   
+@media (max-width: 400px) {
+ .top{
+    flex-direction: column;
+ }
+ .timer-box{
+    margin-top: 50vh;
+    width: 90vw;
+    height: max-content;
+
+    margin-bottom: 7vw;
+}
+
+.todoList-box{
+    width: 90vw;
+    min-height: 500px;
+    height: max-content;
+    margin-bottom: 7vw;
+
+}
+  
+  }
   
