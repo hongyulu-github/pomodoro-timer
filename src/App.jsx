@@ -14,8 +14,8 @@ function App() {
   const [btnText, setbtnText] = useState("Start")
   const [paused, setPaused] = useState(true)
   const [turns,setTurns] = useState([
-    {name:"Break", time: 0.05},
-    {name:"Pomodoro", time: 0.1},
+    {name:"Break", time: 5},
+    {name:"Pomodoro", time: 25},
 ])
   const [currentTurnTime, setCurrentTurnTime] = useState(turns.find(turn => turn.name === currentTurn)?.time || 0)
   useEffect(()=>{
@@ -54,8 +54,8 @@ function App() {
   }
 
   const handleReset = () => {
-    clearInterval(countdown)
-    setCountdown(null)
+    clearInterval(countdownRef.current)
+    countdownRef.current = null
     setCurrentTurn('Pomodoro');
     setbtnText("Start");
    // setCurrentTime("");
@@ -115,7 +115,7 @@ function App() {
           <Timer currentTurn={currentTurn} currentTurnTime={currentTurnTime} btnText={btnText} onReset={handleReset} onStartStop={handleStartStop}/>
 
         </div>
-        <div className='todoList-box'>
+        <div className='todoList-box card'>
           <Form input={input} setInput={setInput} todos={todos} setTodos={setTodos} editTodo={editTodo} setEditTodo={setEditTodo} />
           <TodoList todos={todos} setTodos={setTodos} setEditTodo={setEditTodo}/>
         </div>

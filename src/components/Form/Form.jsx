@@ -33,16 +33,24 @@ const Form = ({input, setInput, todos, setTodos, editTodo, setEditTodo}) => {
   }
 
   return (
-    <form onSubmit={onFormSubmit}>
-        <input type='text' 
-               placeholder='Enter a todo' 
-               className='task-input' 
-               value={input} 
-               required
-               onChange={onInputChange}/>
-        <button className='button-add' type='submit' >
-            {editTodo? 'OK' : 'Add'}
+    <form onSubmit={onFormSubmit} className='flex-center-col'>
+        <h2>To-do List</h2>
+        <div className='flex-center flex-bottom'>
+          <div>
+              <input type='text' 
+                  placeholder='Enter a task to do...' 
+                  className={styles.taskInput} 
+                  value={input} 
+                  required
+                  onChange={onInputChange}/>
+                  <span className={styles.inputBorder}></span>
+          </div>
+       
+        <button className={styles.buttonAdd} type='submit' >
+            {editTodo? 'Save' : 'Add'}
         </button>
+        </div>
+     
 
 
     </form>

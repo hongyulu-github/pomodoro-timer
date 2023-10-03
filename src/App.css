@@ -9,6 +9,8 @@
     --light-green:rgb(215, 229, 202);
     --dark-yellow:rgb(229, 195, 166);
     --light-yellow:rgb(249, 243, 204);
+    --watery-yellow:rgb(249, 246, 226);
+
     --font:'Young Serif', serif;
 }
 
@@ -31,8 +33,9 @@ body,html{
 
 .card {
     border-radius: 15px;
-    background: var(--watery-blue);
-    box-shadow: -15px -15px 30px var(--light-purple); 
+    background: transparent;
+    box-shadow: -15px -15px 30px var(--light-purple), 
+                15px 15px 30px var(--light-blue) ; 
   }
 
 .flex-center{
@@ -41,6 +44,13 @@ body,html{
     align-items: center;
     margin: 0 15px;
 }
+.flex-bottom{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin: 0 15px;
+}
+
 
 .flex-center-col{
     display: flex;
@@ -51,15 +61,36 @@ body,html{
 
 }
 .timer-box{
-    width: 400px;
+    width: 25vw;
     height: 500px;
+    margin-right: 3vw;
+}
+
+.todoList-box{
+    width: 57vw;
+    min-height: 500px;
+    height: max-content;
 }
 
 
+
+
+
+
   
- 
+button {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }
+
+
+button:hover{
+    transform: scale(1.2);
+    transition: ease-in-out 0.4s;
+}
   
- 
   
  
   

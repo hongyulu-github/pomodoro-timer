@@ -1,0 +1,45 @@
+.todoListContainer{
+    margin: 50px 0 0 30px;
+    display: flex;
+    flex-wrap: wrap;
+  
+    
+}
+
+.listItem{
+    display: flex;
+    flex: 1;
+    margin:20px 0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    max-height: 30px;
+    max-width: 15vw;
+    margin-right: 1vw;
+}
+
+.listItem > input{
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-family: var(--font);
+  font-size: 1.1rem;
+  width: 65%;
+}
+.completed{
+    text-decoration-style: solid;
+    text-decoration-line: line-through;
+    text-decoration-color: #ff6c6c;
+    opacity: 0.6;
+}
+i{
+    width: 9%;
+    font-size: 15px;
+}
+.btns{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+
+  

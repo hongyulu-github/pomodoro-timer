@@ -1,0 +1,37 @@
+h2{
+    margin-top: 35px;
+}
+.taskInput{
+   
+    font-size: 1.2rem;
+    background-color: transparent;
+    width: 100%;
+    box-sizing: border-box;
+    padding-inline: 0.5em;
+    padding-block: 0.7em;
+    border: none;
+    border-bottom: 2px solid rgba(221, 221, 221, 0.39);
+}
+.taskInput:focus{
+   outline: none;
+}
+.inputBorder {
+    position: absolute;
+    background: #5891ff;
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    transition: 0.3s;
+   }
+.taskInput:hover {
+    background: #4985e01f;
+   }
+ .taskInput:focus ~ .inputBorder {
+    width: 100%;
+   }
+
+.buttonAdd{
+    font-size: 1.3rem;
+    font-family: var(--font)
+}

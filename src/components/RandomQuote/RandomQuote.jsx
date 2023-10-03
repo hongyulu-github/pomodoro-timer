@@ -25,7 +25,7 @@ const RandomQuote = () => {
 
   return (
     <>
-    <div className={`${styles.quoteContainer} ${styles.card}`}>
+    <div className={`${styles.quoteContainer} card`}>
     <p>{quote.text}</p>
       {authorName && authorName.includes(',') ? (
         <p>--{authorName.slice(0, authorName.indexOf(','))}</p>

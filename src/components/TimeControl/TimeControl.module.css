@@ -11,6 +11,7 @@
 }
 .turnLabel{
    margin: 5px 0;
+   text-align: center;
 }
 .btns > button{
    margin:  0 5px;

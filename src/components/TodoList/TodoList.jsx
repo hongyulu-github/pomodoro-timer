@@ -22,15 +22,15 @@ const TodoList = ({todos, setTodos, setEditTodo}) => {
         setEditTodo(findTodo)
     }
   return (
-    <div>
+    <div className={styles.todoListContainer}>
       {todos.map((todo) => 
-        <li className='list-item' key={todo.id}>
+        <li className={styles.listItem} key={todo.id}>
             <input 
                    type='text' 
                    value={todo.title} 
-                   className={`list ${todo.completed ? 'complete' : ''}`} 
+                   className={todo.completed ? styles.completed : ''}
                    onChange={(event) => event.preventDefault()} />
-            <div>
+            <div className={styles.btns}>
                 <button className='button-complete task-button' onClick={()=> handleComplete(todo)}>
                     <i className='fa-regular fa-circle-check' />
                 </button>
@@ -42,7 +42,9 @@ const TodoList = ({todos, setTodos, setEditTodo}) => {
                 </button>
             </div>
         </li>
+        
       )}
+       
 
     </div>
   )
